@@ -4,28 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {ApolloClient,ApolloProvider, InMemoryCache} from "@apollo/client";
-const cache = new InMemoryCache(
-  {
-  typePolicies:{
-    Mutation:{
-      fields:{
-        createUser(existingData,{args,toReference}){
-          console.log({...existingData})
-          
-          // const newData = toReference({...args.user})
-          return []
-        },
-        read(args){
-          console.log(args);
-        }
-        
-      }
-    }
+import {ApolloClient,ApolloProvider, InMemoryCache,} from "@apollo/client";
+
+const customField = {
+  customField:{
+    read(){
+      return "This is a custom field"
+    }  
   }
 }
-)
-
 
 const client = new ApolloClient({
   cache: new InMemoryCache({}),    
